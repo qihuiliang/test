@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>员工管理页面</title>
+	<!-- 连接css框架 -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="../bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" href="../image/1.jpg">
+	<link rel="stylesheet" type="text/css" href="../css/员工(部门)管理页面.css">
+	<script type="text/javascript" src="../js/员工管理页面.js"></script>
+	<script type="text/javascript">
+		function manage(){
+			window.location.href="新增页面.html";
+		}
+		function bumen(){
+			window.location.href="部门管理页面.html"
+		}
+	</script>
+</head>
+<body>
+	<div id="btn1">
+		<button type="button" class="btn btn-primary" onclick="manage()">新增员工</button>
+		<button type="button" class="btn btn-primary">批量导入</button>
+		<button type="button" class="btn btn-primary">批量导出</button>
+		<button type="button" class="btn btn-primary" onclick="bumen()">部门信息</button>
+		<input id="sousuo" class="form-control" type="text" placeholder="搜索">
+		<img id="tubiao" src="../image/u69.png">
+	</div>
+	
+	<div id="qi">
+		<table class="table table-bordered table-hover">
+
+			<tbody>
+		    <tr>
+		      <th scope="col">员工编号</th>
+		      <th scope="col">员工姓名</th>
+		      <th scope="col">工作</th>
+		      <th scope="col">经理</th>
+		      <th scope="col">雇用日期</th>
+		      <th scope="col">薪水</th>
+		      <th scope="col">津贴</th>
+		      <th scope="col">部门</th>
+		      <th scope="col">操作</th>
+		    </tr>
+
+<!-- 		    <tr>
+		      <th scope="row">7369</th>
+		      <td>SMITH</td>
+		      <td>CLERK</td>
+		      <td>7902</td>
+		      <td>1980-12-17</td>
+		      <td>$800.0</td>
+		      <td>暂无</td>
+		      <td>RESEARCH</td>
+		      <td>
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u53.png">
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u54.png">
+		      </td>
+		    </tr>
+		    <tr>
+		      <th scope="row">7499</th>
+		      <td>ALLEN</td>
+		      <td>SALESMAN</td>
+		      <td>7698</td>
+		      <td>1981-02-20</td>
+		      <td>$1600.0</td>
+		      <td>$300.0</td>
+		      <td>SALESMAN</td>
+		      <td>
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u53.png">
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u54.png">
+		      </td>
+		    </tr>
+		    <tr>
+		      <th scope="row">7521</th>
+		      <td>WARD</td>
+		      <td>SALESMAN</td>
+		      <td>7698</td>
+		      <td>1981-02-22</td>
+		      <td>$1250.0</td>
+		      <td>$500.0</td>
+		      <td>SALESMAN</td>
+		      <td>
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u53.png">
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u54.png">
+		      </td>
+		    </tr>
+		    <tr>
+		      <th scope="row">7788</th>
+		      <td>SCOTT</td>
+		      <td>ANALYST</td>
+		      <td>7566</td>
+		      <td>1987-07-13</td>
+		      <td>$3000.0</td>
+		      <td>暂无</td>
+		      <td>RESEARCH</td>
+		      <td>
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u53.png">
+		      	<img src="E:\度一教育代码\员工信息管理代码\images\员工管理页面\u54.png">
+		      </td>
+		    </tr> -->
+		  </tbody>
+		</table>
+	</div>
+	<div id="btn2">
+		<button type="button" class="btn btn-primary">上一页</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-primary">下一页</button>
+		<span>显示条数</span>
+		<select class="form-control" id="exampleFormControlSelect1">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+    	</select>
+	</div>
+</body>
+</html>

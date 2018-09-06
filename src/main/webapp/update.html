@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跟新数据</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        /*获取到Url里面的参数*/
+        $(function () {
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+            var empno=$.getUrlParam("empno");
+            $.ajax({
+                url:"servlet/SelectEmp",
+                dataType:"json",
+                method: "post",
+                data:{empno:empno},
+                success: function(response){
+                    $("input[name='empno']").val(response.empno);
+                    $("input[name='ename']").val(response.ename);
+                    $("input[name='job']").val(response.job);
+                    $("input[name='mgr']").val(response.mgr);
+                    $("input[name='hiredate']").val(response.hiredate);
+                    $("input[name='sal']").val(response.sal);
+                    $("input[name='com']").val(response.com);
+                    $("input[name='deptno']").val(response.deptno);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<center>
+    <form action="servlet/UpdateEmp" method="get">
+        员工编号<input type="text" name="empno" placeholder="员工编号"/><br><br>
+        员工姓名 <input type="text" name="ename" placeholder="员工姓名"/><br><br>
+        工作<input type="text" name="job" placeholder="工作"/><br><br>
+        经理<input type="text" name="mgr" placeholder="经理"/><br><br>
+        雇佣日期<input type="text" name="hiredate" placeholder="雇佣日期"/><br><br>
+        薪水<input type="text" name="sal" placeholder="薪水"/><br><br>
+        津贴 <input type="text" name="com" placeholder="津贴"/><br><br>
+        部门<input type="text" name="deptno" placeholder="部门"/><br><br>
+        <input type="submit" value="提交数据"/>
+    </form>
+</center>
+</body>
+</html>

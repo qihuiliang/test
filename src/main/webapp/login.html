@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="1.jpg">
+
+	<title>登录界面</title>
+	
+	<!-- 连接css框架 -->
+	<link href="bootstrap.min.css" rel="stylesheet">
+
+	<!-- 连接外部样式表 -->
+	<link rel="stylesheet" href="login.css">
+
+	<script type="text/javascript">
+		function manage(){
+			window.location.href="员工管理页面.html";
+		}
+	</script>
+</head>
+<body class="text-center">
+	<form class="form-signin">
+		<img class="mb-4" src="1.jpg" alt="员工管理信息" width="200" height="200">
+		<h1 class="h3 mb-3 font-weight-normal">员工管理系统</h1>
+		<label for="inputEmail" class="sr-only">Email邮箱</label>
+	<!--required属性：在提交时，如果元素中内容为空白，则不允许提交，同时在浏览器中会弹出提示文字。
+	autofocus属性：当页面打开时，该控件自动获得光标焦点 -->
+		<input type="email" id="inputEmail" class="form-control" placeholder="Email邮箱" required autofocus>
+		<label for="inputPassword" class="sr-only">密码</label>
+		<input type="password" class="form-control" placeholder="密码" required>
+		<div class="checkbox mb-3">
+			<label>
+				<input type="checkbox" value="remember-me">记住你的账号密码
+			</label>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="manage()">登录</button>
+		<p class="mt-5 mb-3 text-muted">&copy; 2018-8-23</p>
+</body>
+</html>

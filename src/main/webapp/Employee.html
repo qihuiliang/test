@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>员工管理页面</title>
+	<!-- 连接css框架 -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="../bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" href="../image/1.jpg">
+	<link rel="stylesheet	" type="text/css" href="../css/员工(部门)管理页面.css">
+	<script type="text/javascript" src="../js/Employee.js"></script>
+	<script type="text/javascript">
+		// 五个数据 1。每页显示的条数 2。当前页面 3。起始行 4。总页数 5。总条数
+		//两个参数分别是：当前页面 ，每页显示的条数(页码和一页显示多少条记录)
+		function goPage(currentPage,pageSize) {
+			var itable = document.getElementById('itable'); // 获取得到table的数据
+			var num = itable.rows.length; //总条数
+			var totalPage = 0; // 总页数
+			// 计算总页数
+			if(num / pageSize > parseInt(num / pageSize)){
+				totalPage = num / pageSize + 1;
+			}else{
+				totalPage = num/pageSize;
+			}
+            // 获取当前页面第一条、最后一条记录的行号
+			var startRow = (currentPage - 1) * pageSize + 1;
+			var endRow = currentPage * pageSize;
+			endRow = (endRow > num) ? num : endRow;
+
+            // 修改table中当前页对应的行的属性为显示，非本页的记录为隐藏
+			for (var i = 1;i<(num+1);i++){
+			    var irow = itable.rows[i-1];
+				if(i>startRow&&i<endRow){
+				    irow.style.display = "block";
+				}else{
+				    irow.style.display = "none";
+				}
+			}
+			// 分页页面列表
+/*			var tempStr = "共" + num + "条记录 分"+totalPage +"页 当前第"+ currentPage +"页";
+			if(currentPage > 1){
+			//    tempStr += "<a href=\"#\" onclick=\"goPage("+(1)+","+psize+")\">首页</a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage-1)+","+psize+")\"><上一页</a>"
+			}else{
+			    tempStr += "首页";
+			    tempStr +="<上一页";
+			}
+
+			if(currentPage<totalPage){
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage+1)+","+psize+")\">下一页></a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(totalPage)+","+psize+")\">尾页</a>";
+			}else{
+			    tempStr += "下一页>";
+			    tempStr +="尾页";
+			}
+			document.getElementById("changePages").innerText = tempStr;*/
+        }
+	</script>
+	<!--页码和一页显示多少条记录-->
+<!--	<script type="text/javascript">
+        $(function(){
+            $.ajax({
+                url:"servlet/pageServlet",
+                dataType:"json",
+                method: "get",
+				data:{currentPage:currentPage,pageSize:pageSize},
+                success:function(response){
+                    $.each(response,function(index,emp){
+                        var $tr = $("<tr></tr>");
+                        $("tbody").append($tr);
+                        $.each(emp,function(key,value){
+                            $tr.append("<td>"+ value+ "</td>");
+                        });
+                        $tr.append('<td><a  href="/servlet/DeleteEmp?empno='+emp.empno+'"><img src="../image/u53.png"/></a></td>')
+                            .append('<td><a href="update.html?empno='+emp.empno+'"><img src="../image/u54.png"></a></td>')
+                    });
+                }
+            });
+        });
+	</script>-->
+</head>
+<body>
+<!--	<div id="btn1">
+		<button type="button" class="btn btn-primary" onclick="goPage()">新增员工</button>
+		<button type="button" class="btn btn-primary">批量导入</button>
+		<button type="button" class="btn btn-primary">批量导出</button>
+		<button type="button" class="btn btn-primary">部门信息</button>
+		<input id="sousuo" class="form-control" type="text" placeholder="搜索">
+		<img id="tubiao" src="../image/u69.png">
+	</div>
+	
+	<div id="qi">
+		<table class="table table-bordered table-hover">
+		<thead>
+		    <tr>
+		      <th scope="col">员工编号</th>
+		      <th scope="col">员工姓名</th>
+		      <th scope="col">工作</th>
+		      <th scope="col">经理</th>
+		      <th scope="col">雇用日期</th>
+		      <th scope="col">薪水</th>
+		      <th scope="col">津贴</th>
+		      <th scope="col">部门</th>
+		      <th scope="col">删除</th>
+			  <th scope="col">修改</th>
+		    </tr>
+		</thead>
+		<tbody id="itable">
+		</tbody>
+		</table>
+	</div>
+	<div class="input-group mb-3" id="opt1">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">分页：</span>
+		</div>
+		<select class="custom-select" id="opt">
+			<option>5</option>
+			<option>10</option>
+		</select>
+	</div>
+	<div id="btn3">
+		<a href="servlet/ByPage?currentPage=1"><button type="button" class="btn btn-primary btn-lg">首页</button></a>&nbsp;&nbsp;&nbsp;
+		<a href="servlet/ByPage?currentPage=1"><button type="button" class="btn btn-primary btn-lg">上一页</button></a>&nbsp;&nbsp;&nbsp;
+		<a href="servlet/ByPage?currentPage=1"><button type="button" class="btn btn-primary btn-lg">下一页</button></a>&nbsp;&nbsp;&nbsp;
+		<a href="servlet/ByPage?currentPage=1"><button type="button" class="btn btn-primary btn-lg">尾页</button></a>
+	</div>-->
+</body>
+</html>

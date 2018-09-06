@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>通过ajax获取数据</title>
+</head>
+<body>
+	<table border="1" style="border-spacing: 0">
+		<tbody>
+			<tr>
+				<th>empno</th>
+				<th>ename</th>
+				<th>job</th>
+				<th>mgr</th>
+				<th>hiredate</th>
+				<th>sal</th>
+				<th>com</th>
+				<th>dept</th>
+			</tr>
+		</tbody>
+	</table>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script>
+		$(function(){
+			// 异步请求 局部刷新  获取后端服务器数据
+			$.ajax({
+				url:"servlet/emp",
+				dataType:"json",
+				method:"get",
+				success:function(response){
+					$.each(response,function(index,emp){
+						var $tr = $("<tr></tr>");
+						$("tbody").append($tr);
+						$.each(emp,function(key,value){
+					    	$tr.append("<td>" + value + "</td>")
+					    });
+				    });
+			    }
+		    });
+		});
+	</script>
+</body>
+</html>

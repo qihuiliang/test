@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax获取数据</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="员工管理页面样式.css">
+</head>
+
+<body>
+<div id="htm">
+    <h1 class="display-4" >员工管理页面</h1>
+</div>
+<div id="home">
+    <span>主页<img src="http://tool.58pic.com/tubiaobao//Public/app/00/00/01/552cc4da6ab84_32.png"></span>
+    <span id="exit">退出<img src="http://tool.58pic.com/tubiaobao//Public/app/00/00/01/552cc61c3fa13_32.png"></span>
+</div>
+
+
+<div id="body">
+
+    <div id="button1">
+        <button type="button" class="btn btn-primary" style="width: 149px" id="new">新增员工</button>
+        <button type="button" class="btn btn-primary" style="width: 149px">批量导入</button>
+        <button type="button" class="btn btn-primary" style="width: 149px">批量导出</button>
+    </div><br/>
+
+    <div id="input1">
+        <input type="text" name="" id="salary" class="form-control" placeholder="搜索">
+    </div><br/>
+
+    <div id="imgs">
+        <img src="http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc1e587668_32.png">
+    </div>
+
+    <div id="form">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">员工编号</th>
+                <th scope="col" >员工姓名</th>
+                <th scope="col">员工职位</th>
+                <th scope="col">经理人</th>
+                <th scope="col">雇佣日期</th>
+                <th scope="col">薪水</th>
+                <th scope="col">津贴</th>
+                <th scope="col">部门</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="button2">
+        <button type="button" class="btn btn-primary" id="shang">上一页</button>
+        <button type="button" class="btn btn-primary" id="xia">下一页</button>
+    </div>
+
+    <div class="input-group" id="ye" style="width: 220px; position: relative; left: 630px; bottom: 53px;">
+        <span class="input-group-text">当前页：</span>
+        <input type="text" name="no" readonly="readonly" id="dang"  class="form-control input-min"  required autofocus><br/>
+    </div>
+    <br/>
+
+    <div class="input-group" id="select">
+       <button class="btn btn-primary" id="ok">确定</button>
+        <select class="form-control" name="option">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+    </div>
+
+
+    <div id="logo">
+        <span>@2018 XIAOSHUNETWORK</span>
+    </div>
+</div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var count = 1;
+    $(function() {
+        var num = $("#dang").val();
+        var option =  $("option:selected").val();
+        $("#dang").val(count);
+        // 异步请求 局部刷新  获取后端服务器数据
+       $.ajax({
+            url: "/servlet/TestListLimitServlet",
+            dataType: "json",
+            method: "post",
+            data:{option:option, no:num},
+            success: function (response) {
+                $.each(response, function (index, emp) {
+                    var $tr = $("<tr></tr>");
+                    $("tbody").append($tr);
+                    $.each(emp, function (key, value) {
+                        $tr.append("<td>" + value + "</td>")
+                    });
+                    $tr.append("<td>" + "<a id='update' href=" + emp.empno + "'updata.html?empno='><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc17f5bb87_32.png'>&nbsp;</span></a>" + "<a id='delete' href='/servlet/Delete?empno=" + emp.empno + "'> <span><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc173dec87_32.png' ></span><sqpn></span></a>" + "</td>")
+                });
+            }
+        });
+
+        $("#new").click(function(){
+            $(function(){
+                window.location.href="insert.html";
+            })
+        });
+
+        $("#xia").click(function(){
+            var num = $("#dang").val();
+            var option =  $("option:selected").val();
+            $("td").remove();
+            count++;
+            $("#dang").val(count);
+            $.ajax({
+                url: "/servlet/TestListLimitServlet",
+                dataType: "json",
+                method: "post",
+                data:{option:option, no:num},
+                success: function (response) {
+                    $.each(response, function (index, emp) {
+                        var $tr = $("<tr></tr>");
+                        $("tbody").append($tr);
+                        $.each(emp, function (key, value) {
+                            $tr.append("<td>" + value + "</td>")
+                        });
+                        $tr.append("<td>" + "<a id='update' href=" + emp.empno + "'updata.html?empno='><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc17f5bb87_32.png'>&nbsp;</span></a>" + "<a id='delete' href='/servlet/Delete?empno=" + emp.empno + "'> <span><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc173dec87_32.png' ></span><sqpn></span></a>" + "</td>")
+                    });
+                }
+            });
+        });
+
+        $("#shang").click(function(){
+            count--;
+            var num = $("#dang").val();
+            var option =  $("option:selected").val();
+            $("#dang").val(count);
+            $("td").remove();
+            $.ajax({
+                url: "/servlet/TestListLimitServlet",
+                dataType: "json",
+                method: "post",
+                data:{option:option, no:num},
+                success: function (response) {
+                    $.each(response, function (index, emp) {
+                        var $tr = $("<tr></tr>");
+                        $("tbody").append($tr);
+                        $.each(emp, function (key, value) {
+                            $tr.append("<td>" + value + "</td>")
+                        });
+                        $tr.append("<td>" + "<a id='update' href=" + emp.empno + "'updata.html?empno='><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc17f5bb87_32.png'>&nbsp;</span></a>" + "<a id='delete' href='/servlet/Delete?empno=" + emp.empno + "'> <span><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc173dec87_32.png' ></span><sqpn></span></a>" + "</td>")
+                    });
+                }
+            });
+        })
+    });
+
+    $(function(){
+       $("#ok").click(function(){
+           var num = $("#dang").val();
+           var option =  $("option:selected").val();
+           $("td").remove();
+           $.ajax({
+               url: "/servlet/TestListLimitServlet",
+               dataType: "json",
+               method: "post",
+               data:{option:option, no:num},
+               success: function (response) {
+                   $.each(response, function (index, emp) {
+                       var $tr = $("<tr></tr>");
+                       $("tbody").append($tr);
+                       $.each(emp, function (key, value) {
+                           $tr.append("<td>" + value + "</td>")
+                       });
+                       $tr.append("<td>" + "<a id='update' href=" + emp.empno + "'updata.html?empno='><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc17f5bb87_32.png'>&nbsp;</span></a>" + "<a id='delete' href='/servlet/Delete?empno=" + emp.empno + "'> <span><img src='http://tool.58pic.com/tubiaobao//Public/app/00/00/00/552cc173dec87_32.png' ></span><sqpn></span></a>" + "</td>")
+                   });
+               }
+           });
+       })
+    });
+
+</script>
+</body>
+</html>
